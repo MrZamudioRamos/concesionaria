@@ -1,0 +1,54 @@
+
+
+entity Coche {
+	marca Boolean
+	modelo String
+    color String
+	numeroSerie String
+    precio Long
+	transpuesto Boolean
+}
+
+entity Venta {
+	fecha LocalDate
+	tipoPago String
+    total Double
+	}
+
+entity Cliente {
+	dni String
+	nombre String
+	numeroCompras Integer
+    tier Integer
+}
+
+entity Empleado {
+	dni String
+	nombre String
+	numeroCompras Integer
+    tier Integer
+}
+
+//muchos coches pueden ser vendidos
+relationship OneToMany {
+	Venta{coche} to Coche
+}
+//un cliente tiene muchas ventas
+//un empleado tiene muchas ventas
+relationship ManyToOne {
+	Cliente{venta} to Venta
+    Coche{venta} to Venta
+    Empleado{venta} to Venta
+}
+
+// Set pagination optionsl
+paginate all with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
