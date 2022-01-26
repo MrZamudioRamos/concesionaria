@@ -1,13 +1,22 @@
 <div>
   <h2 id="page-heading" data-cy="EmpleadoHeading">
     <span jhiTranslate="concesionariaApp.empleado.home.title">Empleados</span>
-
     <div class="d-flex justify-content-end">
+      <button type="submit" (click)="findByActivo(true)" class="btn-primary active-btn btn-sm mr-2">
+        <fa-icon icon="check"></fa-icon>
+        <span class="d-none d-md-inline">Active</span>
+      </button>
+      <button type="submit" (click)="findByActivo(false)" class="btn-primary no-active-btn btn-sm mr-2">
+        <fa-icon icon="times"></fa-icon>
+        <span class="d-none d-md-inline">No Active</span>
+      </button>
+      <button type="submit" (click)="loadPage()" class="btn-primary equals-btn btn-sm mr-2">
+        <span class="d-none d-md-inline">All</span>
+      </button>
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="concesionariaApp.empleado.home.refreshListLabel">Refresh List</span>
       </button>
-
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
@@ -32,16 +41,25 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dni"><span jhiTranslate="concesionariaApp.empleado.dni">Dni</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id">
+            <span jhiTranslate="global.field.id">ID</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dni">
+            <span jhiTranslate="concesionariaApp.empleado.dni">Dni</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="nombre">
-            <span jhiTranslate="concesionariaApp.empleado.nombre">Nombre</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="concesionariaApp.empleado.nombre">Nombre</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="activo">
-            <span jhiTranslate="concesionariaApp.empleado.activo">Activo</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="concesionariaApp.empleado.activo">Activo</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="numeroVentas">
-            <span jhiTranslate="concesionariaApp.empleado.numeroVentas">Numero Ventas</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="concesionariaApp.empleado.numeroVentas">Numero Ventas</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -53,7 +71,16 @@
           </td>
           <td>{{ empleado.dni }}</td>
           <td>{{ empleado.nombre }}</td>
-          <td>{{ empleado.activo }}</td>
+          <div *ngIf="empleado.activo">
+            <td>
+              <fa-icon icon="check"></fa-icon>
+            </td>
+          </div>
+          <div *ngIf="!empleado.activo">
+            <td>
+              <fa-icon icon="times"></fa-icon>
+            </td>
+          </div>
           <td>{{ empleado.numeroVentas }}</td>
           <td class="text-right">
             <div class="btn-group">

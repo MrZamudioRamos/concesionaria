@@ -53,6 +53,19 @@ export class EmpleadoComponent implements OnInit {
       });
   }
 
+  findByActivo(findActivo: boolean): void {
+    this.empleadoService.findByActivo(findActivo).subscribe({
+      next: (res: HttpResponse<IEmpleado[]>) => {
+        this.isLoading = false;
+        this.empleados = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+        this.onError();
+      },
+    });
+  }
+
   ngOnInit(): void {
     this.handleNavigation();
   }

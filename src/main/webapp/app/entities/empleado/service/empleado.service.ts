@@ -34,6 +34,10 @@ export class EmpleadoService {
     return this.http.get<IEmpleado>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByActivo(activo: boolean): Observable<EntityArrayResponseType> {
+    return this.http.get<IEmpleado[]>(`${this.resourceUrl}/by-activo/${String(activo)}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IEmpleado[]>(this.resourceUrl, { params: options, observe: 'response' });

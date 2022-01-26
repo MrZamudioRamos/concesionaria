@@ -1,6 +1,7 @@
 package com.concesionaria.app.service;
 
 import com.concesionaria.app.domain.Empleado;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,14 @@ public interface EmpleadoService {
      * @return the list of entities.
      */
     Page<Empleado> findAll(Pageable pageable);
+
+    /**
+     * Get all the empleados by status.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    List<Empleado> findByActivo(boolean activo);
 
     /**
      * Get the "id" empleado.

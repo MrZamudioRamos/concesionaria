@@ -35,6 +35,14 @@ public interface CocheService {
     Page<Coche> findAll(Pageable pageable);
 
     /**
+     * Get all the coches by modelo paginados.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<Coche> cochesPaginadosPorModelo(String modelo, Pageable pageable);
+
+    /**
      * Get all the coches by color amarillo.
      *
      * @param string color pagination information.

@@ -3,6 +3,7 @@ package com.concesionaria.app.service.impl;
 import com.concesionaria.app.domain.Empleado;
 import com.concesionaria.app.repository.EmpleadoRepository;
 import com.concesionaria.app.service.EmpleadoService;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,5 +76,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public void delete(Long id) {
         log.debug("Request to delete Empleado : {}", id);
         empleadoRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Empleado> findByActivo(boolean activo) {
+        return empleadoRepository.findByActivo(activo);
     }
 }

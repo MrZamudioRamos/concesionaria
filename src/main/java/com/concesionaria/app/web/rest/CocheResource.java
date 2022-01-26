@@ -154,6 +154,24 @@ public class CocheResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    /**
+     * {@code GET /coches/by-modelo/{modelo} : get all the coches paginados por
+     * modelo.
+     *
+     * @param modelo the pagination information
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of coches in body.
+     */
+    @GetMapping("/coches/by-modelo/{modelo}")
+    public ResponseEntity<List<Coche>> getAllCochesByModelo(@PathVariable String modelo, Pageable pageable) {
+        log.debug("REST request to get a page of Coches");
+        Page<Coche> page = cocheService.cochesPaginadosPorModelo(modelo, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
     @GetMapping("/coches/by-color/{color}")
     public ResponseEntity<List<Coche>> getAllCochesByColor(@PathVariable String color) {
         log.debug("REST request to get a page of Coches");

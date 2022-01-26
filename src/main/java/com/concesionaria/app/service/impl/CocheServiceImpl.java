@@ -93,4 +93,14 @@ public class CocheServiceImpl implements CocheService {
         log.debug("Request to delete Coche : {}", id);
         cocheRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Coche> cochesPaginadosPorModelo(String modelo, Pageable pageable) {
+        log.debug("Request to get all Coches");
+        if ("".equals(modelo)) {
+            cocheRepository.findAll();
+        }
+        return cocheRepository.cochesPaginadosPorModelo(modelo, pageable);
+    }
 }

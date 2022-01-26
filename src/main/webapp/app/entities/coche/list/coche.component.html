@@ -7,8 +7,9 @@
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="concesionariaApp.coche.home.refreshListLabel">Refresh List</span>
       </button>
-
       <input type="text" [(ngModel)]="color" (ngModelChange)="findByColor()" placeholder="Buscar por color..." />
+
+      <input type="text" [(ngModel)]="modelo" (ngModelChange)="findByModel()" placeholder="Buscar por modelo..." />
 
       <button
         id="jh-create-entity"
